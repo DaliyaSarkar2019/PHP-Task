@@ -6,8 +6,8 @@
 </head>
 
 <body>
-	<form action="" method="post">
-        <input type="Search" name="s1" id="s1" autocomplete="off" placeholder="Search..">
+	<form action="search.php" method="post">
+        <input type="Search" name="s1" id="s1" autocomplete="off" placeholder="Enter the ID">
        	<input type="submit" name="b1" value="Search"> <br/><br/>
     </form>
     <table border="1">
