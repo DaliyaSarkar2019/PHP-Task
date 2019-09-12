@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Login System</title>
+<script src="js/jquery-1.12.0.min.js"></script>
+<script src="js/login.js"></script>
+</head>
+<body>
+<div style="width:400px;margin:auto;box-shadow:2px 2px 2px 2px #999;">
+	<center><h1 style="color:#281BD0">Login To Your Account</h1></center>
+    <center><div id="login_error"></div></center>
+	<table border="0" style="margin:auto">
+    	<thead>
+        	<tr>
+            	<th><strong>Username :</strong></th>
+                <td><input type="text" placeholder="Enter Username" name="username" id="username"></td>
+            </tr>
+        </thead>
+        <tbody>
+        	<tr>
+            	<th><strong>Password :</strong></th>
+                <td><input type="password" placeholder="Enter password" name="password" id="password"></td>
+			</tr>
+         </tbody>
+         <tr><td colspan="2"><center><button id="login_btn">LOGIN</button></center></td></tr>
+     </table>
+    
+</div>
+<style>
+#login_btn{
+	width:150px;
+	height:30px;
+	background-color:#3E56E4;
+	color:white;
+	outline:none;
+	border-color:#3E56E4;
+	margin-top:10px;
+}
+#login_btn:hover{
+	background-color:#3EC923;
+	border-color:#3EC923;
+}
+#login_error{
+	color:red;
+	font-size:16px;
+	font-family:Constantia, "Lucida Bright", "DejaVu Serif", Georgia, serif;
+}
+th{
+	font-size:20px;
+	font-family:Baskerville, "Palatino Linotype", Palatino, "Century Schoolbook L", "Times New Roman", serif;
+	color:#281BD0;
+}
+input{
+	width:200px;
+	height:30px;
+	outline:none;
+	color:#1884E9;
+	font-size:14px;
+	border-radius:20px;
+	padding:10px;
+}
+
+
+</style>
+</body>
+</html>
