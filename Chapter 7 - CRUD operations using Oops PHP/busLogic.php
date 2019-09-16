@@ -23,6 +23,18 @@
 			}
 		}
 		
+		function funcUpdate()
+		{
+			$qry = "UPDATE `tbluser` SET `name`='$this->name',`age`='$this->age',`address`='$this->address',`salary`='$this->salary',`gender`='$this->gender',`sports`='$this->sports' WHERE `id`='$this->id'";
+			$result = $this->connect()->query($qry);
+			if($result)
+			{
+				echo "Record Updated!!";
+			}else{
+				echo "Error Occured, try again later!!";
+			}
+		}
+		
 		function funcSelect()
 		{
 			$qry = "select * from tblUser";
@@ -52,7 +64,7 @@
 			$res = $this->connect()->query($qry);
 			$objArr = array();
 			while($r = mysqli_fetch_assoc($res)){
-				$objArr[] = $r;
+				$objArr = $r;
 			}
 			return $objArr;
 		}

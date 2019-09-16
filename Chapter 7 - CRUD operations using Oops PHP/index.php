@@ -10,25 +10,28 @@
 		$obj->address = $_POST['address1'];
 		$obj->gender = $_POST['gender1'];
 		$obj->sports = implode(',',$_POST['chk']);
-		$obj->funcSave();
+		
+		if($_POST['btn1'] == 'Submit')
+		{
+			$obj->funcSave();
+		}else{
+			$obj->id = $_POST['hid'];
+			$obj->funcUpdate();
+		}
 	}
-?>
-<?php
+
 	if(isset($_GET['did']))
 	{
 		$obj->id = $_GET['did'];
 		$obj->funcDelete();
 	}
-?>
 
-<?php
+	$sports = array();
 	if(isset($_GET['uid']))
 	{
 		$obj->id = $_GET['uid'];
-		$objEdit = $obj->funcEdit();
-		foreach($objEdit as $obedit) { 
-		
-		}
+		$obedit = $obj->funcEdit();
+		$sports = explode(',', $obedit['sports']);
 	}
 ?>
 
@@ -42,6 +45,7 @@
 <body>
 	<h2>Basic Registration Form</h2>
 	<form name="f1" action="index.php" method="post">
+    	<input type="hidden" name="hid" value="<?php echo !empty($_REQUEST['uid'])?$_REQUEST['uid']:''; ?>">
     	<table>
         	<tr>
             	<td>NAME :</td>
@@ -54,33 +58,34 @@
                     <?php
 						for($i=18;$i<=60;$i++)
 						{
-							echo "<option value='$i'>$i</option>";
+							$sel = !empty($obedit['age']) && $obedit['age'] == $i?'selected':'';
+							echo "<option value='$i' $sel >$i</option>";
 						}
 					?>
                 </td>
             </tr>
             <tr>
             	<td>SALARY :</td>
-                <td><input type="text" name="salary1" placeholder="Enter Salary" autocomplete="off"></td>
+                <td><input type="text" name="salary1" placeholder="Enter Salary" autocomplete="off" value="<?php echo !empty($obedit)?$obedit['salary']:''; ?>"></td>
             </tr>
             <tr>
             	<td>ADDRESS :</td>
-                <td><textarea rows="3" cols="25" name="address1" placeholder="Enter Address"></textarea></td>
+                <td><textarea rows="3" cols="25" name="address1" placeholder="Enter Address"><?php echo !empty($obedit)?$obedit['address']:''; ?></textarea></td>
             </tr>
             <tr>
             	<td>GENDER :</td>
-                <td><input type="radio" name="gender1" value="Male">Male
-                <input type="radio" name="gender1" value="Female">Female</td>
+                <td><input type="radio" name="gender1" value="Male" <?php echo !empty($obedit['gender']) && $obedit['gender'] == 'Male'?'checked':'' ?>>Male
+                <input type="radio" name="gender1" value="Female" <?php echo !empty($obedit['gender']) && $obedit['gender'] == 'Female'?'checked':'' ?> >Female</td>
             </tr>
             <tr>
             	<td>SPORTS :</td>
-                <td><input type="checkbox" name="chk[]" value="Cricket">Cricket
-                <input type="checkbox" name="chk[]" value="Football">Football
-                <td><input type="checkbox" name="chk[]" value="Hockey">Hockey
-                <input type="checkbox" name="chk[]" value="Boxing">Boxing</td>
+                <td><input type="checkbox" name="chk[]" value="Cricket" <?php echo in_array('Cricket',$sports)?'checked':'' ?>>Cricket
+                <input type="checkbox" name="chk[]" value="Football" <?php echo in_array('Football',$sports)?'checked':'' ?>>Football
+                <td><input type="checkbox" name="chk[]" value="Hockey" <?php echo in_array('Hockey',$sports)?'checked':'' ?>>Hockey
+                <input type="checkbox" name="chk[]" value="Boxing" <?php echo in_array('Boxing',$sports)?'checked':'' ?>>Boxing</td>
             </tr>
             <tr>
-                <td><input type="submit" name="btn1" value="SUBMIT"></td>
+                <td><input type="submit" name="btn1" value="<?php echo !empty($obedit)?'Update':'Submit'; ?>"></td>
                 <td><input type="submit" name="btn2" value="CANCEL"></td>
             </tr>
         </table>
